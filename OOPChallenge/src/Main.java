@@ -58,8 +58,6 @@ public class Main {
         }
 
         Order order = new Order(first, second, third, fourth, fifth, sixth, deluxe);                                    //We create a new object of type 'Object' and assign to it all the variables showed above
-        order.printOrder();                                                                                             //We call the method 'printOrder' on class 'Order' to print our Order
-        System.out.println();
 
         System.out.println("Do you want to add some extra toppings | 1 (yes) or 2 (no):");
         toppingsFlag = scanner.nextInt();
@@ -71,9 +69,7 @@ public class Main {
                 case 2 -> order.addToppings(2);
                 case 3 -> order.addToppings(3);
             }
-            order.printOrder();
         }
-        System.out.println();
 
         System.out.println("Do you cant to delete the specific position in your order? | 1 (yes) or 2 (no):");
         deleteFlag = scanner.nextInt();
@@ -85,10 +81,8 @@ public class Main {
                 case 2 -> order.deletePosition(2);
                 case 3 -> order.deletePosition(3);
             }
-            order.printOrder();
         }
 
-        System.out.println("\n=====Your Final Order=====");
         order.printOrder();
         System.out.println();
 
@@ -117,12 +111,12 @@ public class Main {
 
     }
 
-    private static void createMenu(int flag) {
+    private static void createMenu(int flag) {                                                                     //We create an object of type 'Object' and use it to call the method 'showMenu' on class 'Order'
         Order menu = new Order();
         menu.showMenu(flag);
     }
 
-    public static void showMenu() {
+    public static void showMenu() {                                                                                //We use this function to offer the customer to view the menu
         Scanner menu = new Scanner(System.in);
 
         System.out.println("Do you want to see the Menu? | 1 (yes) or 2 (no):");

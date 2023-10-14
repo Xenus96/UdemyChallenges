@@ -9,12 +9,18 @@ public class Burger {
     private double toppingsPrice;
 
     public Burger(String type, char size, boolean deluxe) {                  //Default constructor
-        if (deluxe) {
-            this.type = type + " Deluxe";
-        } else {
-            this.type = type;
+        if (checkInput(type)) {                                              //If method 'checkInput' return 'true' then we assign user's input to the fields 'type' and 'size'
+            this.size = size;
+            if (deluxe) {
+                this.type = type + " Deluxe";
+            } else {
+                this.type = type;
+            }
+        } else {                                                                    //If method 'checkInput' return 'false' then we omit the user's input and set some static values
+            this.type = "No burger";
+            this.size = 'N';
         }
-        this.size = size;
+
         this.deluxe = deluxe;
         this.toppings = "";
         this.toppingsPrice = 0.0;
@@ -25,40 +31,35 @@ public class Burger {
         this.size = size;
     }
 
-    private double totalPrice() {                                  //Calculate the burger's price with its type and size. This method nobody can call directly
+    private double totalPrice() {                                                   //Calculate the burger's price with its type and size. This method nobody can call directly
         double burgerTypePrice = 0.0;
         double burgerSizePrice = 0.0;
 
-        if (deluxe) {                                          //If burger is Deluxe ('deluxe' field is 'true') then we add to field 'type' string 'Deluxe' and set static price of the Order to $25
-            burgerTypePrice += 25.0;
-            return burgerTypePrice + burgerSizePrice;
-        } else if (!deluxe) {
-            switch (type) {                                        //If customer enter a correct 'type' of burger then the 'price' will be calculated
-                case "Big Mac" -> burgerTypePrice += 5.0;
-                case "McDouble" -> burgerTypePrice += 7.5;
-                case "Cheeseburger" -> burgerTypePrice += 6.43;
-                case "Chickenburger" -> burgerTypePrice += 5.45;
-                case "Fishburger" -> burgerTypePrice += 6.76;
-//                default -> { this.type = "No burger"; burgerTypePrice = 0.0; }                //If customer's input won't match to any case then 'type' will be set to 'No burger' and 'price' will be set to '0' (zero)
-            }
+        if (type != "No burger") {
+            if (deluxe) {                                                           //If burger is Deluxe ('deluxe' field is 'true') then we add to field 'type' string 'Deluxe' and set static price of the Order to $25
+                burgerTypePrice += 17.0;
+                return burgerTypePrice + burgerSizePrice;
+            } else if (!deluxe) {
+                switch (type) {                                                     //If customer enter a correct 'type' of burger then the 'price' will be calculated
+                    case "Big Mac" -> burgerTypePrice += 5.0;
+                    case "McDouble" -> burgerTypePrice += 7.5;
+                    case "Cheeseburger" -> burgerTypePrice += 6.43;
+                    case "Chickenburger" -> burgerTypePrice += 5.45;
+                    case "Fishburger" -> burgerTypePrice += 6.76;
+                }
 
-            if (type != "No burger") {                                              //If it isn't a Deluxe burger then the customer can change the burger's size
                 switch (size) {                                                     //If customer enter a correct 'size' of burger then the 'price' will be calculated
                     case 'S' -> burgerTypePrice -= (burgerTypePrice * 0.25);        //If the 'size' is 'S' (Small) then we subtract from burger's price 25%
                     case 'M' -> burgerSizePrice = 0.0;                              //If the 'size' is 'M' (Medium) then the burger's price won't change
                     case 'L' -> burgerSizePrice += burgerTypePrice / 2;             //If the 'size' is 'L' (Large) then we add to the burger's price 50%
-                    default -> {
-                        this.size = 'M';                                            //It is 'M' (Medium) size of burger by default
-                        burgerSizePrice = 0;
-                    }
                 }
             }
         }
 
-        return burgerTypePrice + burgerSizePrice;              //The formula of calculating the burger's total price. The sum will be rounded with 'Math.round'
+        return burgerTypePrice + burgerSizePrice;                        //The formula of calculating the burger's total price. The sum will be rounded with 'Math.round'
     }
 
-    public void addTopping(int flag) {                         //The customer can add extra toppings to his(her) burger with this method
+    public void addTopping(int flag) {                                   //The customer can add extra toppings to his(her) burger with this method
         double toppingPrice = 0.0;
         counter = 0;
 
@@ -114,11 +115,11 @@ public class Burger {
          this.toppingsPrice += toppingPrice;                       //Here we add the cost of the toppings chosen by to the customer to the Total Price
     }
 
-    public double getPrice() {                             //We calculate the value of field 'price' via method 'totalPrice' and return it
+    public double getPrice() {                                     //We calculate the value of field 'price' via method 'totalPrice' and return it
         return this.price = totalPrice();
     }
 
-    public String getToppings() {                         //We use this getter in 'printOrder' method on class 'Order'
+    public String getToppings() {                                  //We use this getter in 'printOrder' method on class 'Order'
         return this.toppings;
     }
 
@@ -127,14 +128,14 @@ public class Burger {
     }
 
     @Override
-    public String toString() {                            //We use this getter in 'printOrder' method on class 'Order'
+    public String toString() {                                     //We use this getter in 'printOrder' method on class 'Order'
         return "Burger{" +
                 "type='" + type + '\'' +
                 ", size=" + size +
                 '}';
     }
 
-    public void burgerMenu() {                              //With this method we can review the burger's menu
+    public void burgerMenu() {                                     //With this method we can review the burger's menu
         System.out.println("===Burgers===\n" +
                 "Big Mac | $5.0\n" +
                 "McDouble | $7.5\n" +
@@ -153,6 +154,14 @@ public class Burger {
                 "Any Deluxe order has a static price - $25\n" +
                 "you can chose whatever you want and the price won't change\n");
     }
+
+    private boolean checkInput(String type) {                                                               //If the string in the 'if' statement contains the user input ('type' variable) then we return 'true'
+        if ("Big Mac McDouble Cheeseburger Chickenburger Fishburger".contains(type)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 class Drink {
@@ -164,39 +173,39 @@ class Drink {
 
 
     public Drink(String type, char size, boolean deluxe) {              //Default constructor
-        this.type = type;
-        this.size = size;
+        if(checkInput(type)) {
+            this.type = type;
+            this.size = size;
+        } else {
+            this.type = "No drink";
+            this.size = 'N';
+        }
         this.deluxe = deluxe;
     }
 
-    public void deleteDrink(String type, char size) {                           //The method for deleting positions in the order
+    public void deleteDrink(String type, char size) {               //The method for deleting positions in the order
         this.type = type;
         this.size = size;
     }
 
-    private double totalPrice() {                       //The method to calculate the drink's total price with its type and size. This method nobody can call directly
+    private double totalPrice() {                                   //The method to calculate the drink's total price with its type and size. This method nobody can call directly
         double drinkTypePrice = 0.0;
         double drinkSizePrice = 0.0;
 
-        switch (type) {                                      //If customer's input won't match to any of the cases then the 'type' will be set to 'No drink'
-            case "Coke" -> drinkTypePrice = 2.5;
-            case "Ice Coffee" -> drinkTypePrice = 2.25;
-            case "Orange Juice" -> drinkTypePrice = 3.1;
-            case "Apple Juice" -> drinkTypePrice = 2.1;
-            case "Cold Tea" -> drinkTypePrice = 2.4;
-            case "Hot Tea" -> drinkTypePrice = 1.75;
-//            default -> { this.type += "No drink"; drinkTypePrice = 0; }
-        }
+        if (type != "No drink") {
+            switch (type) {                                         //If customer's input won't match to any of the cases then the 'type' will be set to 'No drink'
+                case "Coke" -> drinkTypePrice = 2.5;
+                case "Ice Coffee" -> drinkTypePrice = 2.25;
+                case "Orange Juice" -> drinkTypePrice = 3.1;
+                case "Apple Juice" -> drinkTypePrice = 2.1;
+                case "Cold Tea" -> drinkTypePrice = 2.4;
+                case "Hot Tea" -> drinkTypePrice = 1.75;
+            }
 
-        if (type != "No drink") {                              //If the field 'type' isn't equals to string 'No drink' then we calculate the drink's price with its size
             switch (size) {
                 case 'S' -> drinkTypePrice -= (drinkTypePrice * 0.15);          //If the 'size' is 'S' (Small) then we subtract from drink's price 15%
                 case 'M' -> drinkSizePrice = 0.0;                               //If the 'size' is 'M' (Medium) then the price won't change
                 case 'L' -> drinkSizePrice = drinkTypePrice / 2;                //If the 'size' is 'L' (Large) then we add to the drink's price 50%
-                default -> {
-                    this.size = 'S';                                            //It is 'S' (Small) size of drink by default
-                    drinkTypePrice -= (drinkTypePrice * 0.15);
-                }
             }
         }
 
@@ -208,19 +217,19 @@ class Drink {
         return drinkTypePrice + drinkSizePrice;
     }
 
-    public double getPrice() {                            //We calculate the value of field 'price' via method 'totalPrice' and return it
+    public double getPrice() {                                   //We calculate the value of field 'price' via method 'totalPrice' and return it
         return this.price = totalPrice();
     }
 
     @Override
-    public String toString() {                             //We use this getter in 'printOrder' method on class 'Order'
+    public String toString() {                                   //We use this getter in 'printOrder' method on class 'Order'
         return "Drink{" +
                 "type='" + type + '\'' +
                 ", size=" + size +
                 '}';
     }
 
-    public void drinkMenu() {                            //With this method we can review the drink's menu
+    public void drinkMenu() {                                    //With this method we can review the drink's menu
         System.out.println("===Drinks===\n" +
                 "Coke | $2.5\n" +
                 "Ice Coffee | $2.25\n" +
@@ -233,6 +242,14 @@ class Drink {
                 "'M' (Medium) | price don't change\n" +
                 "'L' (Large) | price + 50%\n");
     }
+
+    private boolean checkInput(String type) {
+        if ("Coke Ice Coffee Orange Juice Apple Juice Cold Tea Hot Tea".contains(type)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 class SideItem {
@@ -243,12 +260,17 @@ class SideItem {
     private boolean deluxe;
 
     public SideItem(String type, char size, boolean deluxe) {
-        this.type = type;
-        this.size = size;
+        if (checkInput(type)) {
+            this.type = type;
+            this.size = size;
+        } else {
+            this.type = "No Side Item";
+            this.size = 'N';
+        }
         this.deluxe = deluxe;
     }
 
-    public void deleteSideItem(String type, char size) {                                    //The method for deleting positions in the order
+    public void deleteSideItem(String type, char size) {                                               //The method for deleting positions in the order
         this.type = type;
         this.size = size;
     }
@@ -257,20 +279,19 @@ class SideItem {
         double sideItemTypePrice = 0.0;
         double sideItemSizePrice = 0.0;
 
-        switch (type) {
-            case "Fries" -> sideItemTypePrice = 4.5;
-            case "Chicken Nuggets" -> sideItemTypePrice = 4.95;
-            case "Salad" -> sideItemTypePrice = 3.75;
-//            case "" -> { this.type = "No side item"; sideItemTypePrice = 0; }
-        }
+        if (type != "No Side Item") {
+            switch (type) {
+                case "Fries" -> sideItemTypePrice = 4.5;
+                case "Chicken Nuggets" -> sideItemTypePrice = 4.95;
+                case "Salad" -> sideItemTypePrice = 3.75;
+            }
 
-        if (type != "No side item") {
             switch (size) {
                 case 'S' -> sideItemTypePrice -= (sideItemTypePrice * 0.2);                        //If the 'size' is 'S' (Small) then we subtract from side item's price 20%
                 case 'M' -> sideItemSizePrice = 0.0;                                               //If the 'size' is 'M' (Medium) then the price won't change
                 case 'L' -> sideItemSizePrice = sideItemTypePrice / 2;                             //If the 'size' is 'L' (Large) then we add to the side item's price 50%
-                default -> { this.size = 'S'; sideItemTypePrice -= (sideItemTypePrice * 0.2); }    //It is 'S' (Small) size of side item by default
             }
+
         }
 
         if (deluxe == true) {                                               //If customer ordered the Deluxe burger then the price of the Side Item is included into the burger's price
@@ -302,5 +323,13 @@ class SideItem {
                 "'S' (Small) | price - 15%\n" +
                 "'M' (Medium) | price don't change\n" +
                 "'L' (Large) | price + 50%\n");
+    }
+
+    private boolean checkInput(String type) {
+        if ("Fries Chicken Nuggets Salad".contains(type)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
