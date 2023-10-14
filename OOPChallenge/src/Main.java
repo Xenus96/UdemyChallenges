@@ -10,17 +10,21 @@ public class Main {
         String first, third, fifth;
         char second, fourth, sixth;
         boolean deluxe;
-        int deluxeFlag, burgerSizeFlag, drinkSizeFlag, sideItemSizeFlag, toppingsFlag, deleteFlag;
+        int deluxeFlag, burgerSizeFlag, drinkSizeFlag, sideItemSizeFlag, toppingsFlag, deleteFlag, menuFlag;
 
         System.out.println("=====Make your order=====");
+        showMenu();                                                                                          //The method which creates new object of type 'Order' and uses it to call the method 'showMenu' on class 'Order'
+
         System.out.println("Burger | type & size (1 - Small; 2 - Medium; 3 - Large):");
         first = scanner.nextLine();
         burgerSizeFlag = scanner.nextInt();
 
+        showMenu();
         System.out.println("Drink | type & size (1 - Small; 2 - Medium; 3 - Large):");
         third = scanner1.nextLine();
         drinkSizeFlag = scanner1.nextInt();
 
+        showMenu();
         System.out.println("Side Item | type & size (1 - Small; 2 - Medium; 3 - Large):");
         fifth = scanner2.nextLine();
         sideItemSizeFlag = scanner2.nextInt();
@@ -53,8 +57,8 @@ public class Main {
             deluxe = false;
         }
 
-        Order order = new Order(first, second, third, fourth, fifth, sixth, deluxe);
-        order.printOrder();
+        Order order = new Order(first, second, third, fourth, fifth, sixth, deluxe);                                    //We create a new object of type 'Object' and assign to it all the variables showed above
+        order.printOrder();                                                                                             //We call the method 'printOrder' on class 'Order' to print our Order
         System.out.println();
 
         System.out.println("Do you want to add some extra toppings | 1 (yes) or 2 (no):");
@@ -83,12 +87,13 @@ public class Main {
             }
             order.printOrder();
         }
+
+        System.out.println("\n=====Your Final Order=====");
+        order.printOrder();
         System.out.println();
 
 
-
-
-        Order newOrder = new Order();
+        Order newOrder = new Order();                                                                                   //If we create a new object of type 'Object' without any parameters, we will get the 'Common Order'
         newOrder.printOrder();
         System.out.println();
 
@@ -110,5 +115,23 @@ public class Main {
 //        newOrder4.printOrder();
 
 
+    }
+
+    private static void createMenu(int flag) {
+        Order menu = new Order();
+        menu.showMenu(flag);
+    }
+
+    public static void showMenu() {
+        Scanner menu = new Scanner(System.in);
+
+        System.out.println("Do you want to see the Menu? | 1 (yes) or 2 (no):");
+        int menuFlag = menu.nextInt();
+
+        if (menuFlag == 1) {
+            System.out.println("Menu | 1 - Burgers; 2 - Drinks; 3 - Side Items");
+            menuFlag = menu.nextInt();
+            createMenu(menuFlag);
+        }
     }
 }

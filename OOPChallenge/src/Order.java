@@ -37,4 +37,12 @@ public class Order {
             case 3 -> sideItem.deleteSideItem("", ' ');
         }
     }
+
+    public void showMenu(int flag) {                                    //This method is used to show the Menu
+        switch (flag) {
+            case 1 -> burger.burgerMenu();
+            case 2 -> drink.drinkMenu();
+            case 3 -> sideItem.sideItemMenu();
+        }
+    }
 }

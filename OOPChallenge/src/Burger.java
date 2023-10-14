@@ -9,7 +9,11 @@ public class Burger {
     private double toppingsPrice;
 
     public Burger(String type, char size, boolean deluxe) {                  //Default constructor
-        this.type = type;
+        if (deluxe) {
+            this.type = type + " Deluxe";
+        } else {
+            this.type = type;
+        }
         this.size = size;
         this.deluxe = deluxe;
         this.toppings = "";
@@ -26,8 +30,6 @@ public class Burger {
         double burgerSizePrice = 0.0;
 
         if (deluxe) {                                          //If burger is Deluxe ('deluxe' field is 'true') then we add to field 'type' string 'Deluxe' and set static price of the Order to $25
-            type += "Deluxe";
-            size = 'L';
             burgerTypePrice += 25.0;
             return burgerTypePrice + burgerSizePrice;
         } else if (!deluxe) {
@@ -37,7 +39,7 @@ public class Burger {
                 case "Cheeseburger" -> burgerTypePrice += 6.43;
                 case "Chickenburger" -> burgerTypePrice += 5.45;
                 case "Fishburger" -> burgerTypePrice += 6.76;
-                case "" -> { this.type = "No burger"; burgerTypePrice = 0.0; }                //If customer's input won't match to any case then 'type' will be set to 'No burger' and 'price' will be set to '0' (zero)
+//                default -> { this.type = "No burger"; burgerTypePrice = 0.0; }                //If customer's input won't match to any case then 'type' will be set to 'No burger' and 'price' will be set to '0' (zero)
             }
 
             if (type != "No burger") {                                              //If it isn't a Deluxe burger then the customer can change the burger's size
@@ -53,7 +55,7 @@ public class Burger {
             }
         }
 
-        return burgerTypePrice + burgerSizePrice;              //The formula of calculating the burger's total price
+        return burgerTypePrice + burgerSizePrice;              //The formula of calculating the burger's total price. The sum will be rounded with 'Math.round'
     }
 
     public void addTopping(int flag) {                         //The customer can add extra toppings to his(her) burger with this method
@@ -116,7 +118,7 @@ public class Burger {
         return this.price = totalPrice();
     }
 
-    public String getToppings() {
+    public String getToppings() {                         //We use this getter in 'printOrder' method on class 'Order'
         return this.toppings;
     }
 
@@ -125,11 +127,31 @@ public class Burger {
     }
 
     @Override
-    public String toString() {
+    public String toString() {                            //We use this getter in 'printOrder' method on class 'Order'
         return "Burger{" +
                 "type='" + type + '\'' +
                 ", size=" + size +
                 '}';
+    }
+
+    public void burgerMenu() {                              //With this method we can review the burger's menu
+        System.out.println("===Burgers===\n" +
+                "Big Mac | $5.0\n" +
+                "McDouble | $7.5\n" +
+                "Cheeseburger | $6.43\n" +
+                "Chickenburger | $5.45\n" +
+                "Fishburger | $6.76\n" +
+                "==Burger's size==\n" +
+                "'S' (Small) | price - 25%\n" +
+                "'M' (Medium) | price don't change\n" +
+                "'L' (Large) | price + 50%\n" +
+                "==Toppings==\n" +
+                "Extra Cheese | $0.75\n" +
+                "Extra Ketchup | $0.65\n" +
+                "Extra Mustard | $0.7\n" +
+                "==Deluxe Order==\n" +
+                "Any Deluxe order has a static price - $25\n" +
+                "you can chose whatever you want and the price won't change\n");
     }
 }
 
@@ -163,7 +185,7 @@ class Drink {
             case "Apple Juice" -> drinkTypePrice = 2.1;
             case "Cold Tea" -> drinkTypePrice = 2.4;
             case "Hot Tea" -> drinkTypePrice = 1.75;
-            case "" -> { this.type = "No drink"; drinkTypePrice = 0; }
+//            default -> { this.type += "No drink"; drinkTypePrice = 0; }
         }
 
         if (type != "No drink") {                              //If the field 'type' isn't equals to string 'No drink' then we calculate the drink's price with its size
@@ -191,11 +213,25 @@ class Drink {
     }
 
     @Override
-    public String toString() {
+    public String toString() {                             //We use this getter in 'printOrder' method on class 'Order'
         return "Drink{" +
                 "type='" + type + '\'' +
                 ", size=" + size +
                 '}';
+    }
+
+    public void drinkMenu() {                            //With this method we can review the drink's menu
+        System.out.println("===Drinks===\n" +
+                "Coke | $2.5\n" +
+                "Ice Coffee | $2.25\n" +
+                "Orange Juice | $3.1\n" +
+                "Apple Juice | $2.1\n" +
+                "Cold Tea | $2.4\n" +
+                "Hot Tea | $1.75\n" +
+                "==Drink's size==\n" +
+                "'S' (Small) | price - 15%\n" +
+                "'M' (Medium) | price don't change\n" +
+                "'L' (Large) | price + 50%\n");
     }
 }
 
@@ -225,7 +261,7 @@ class SideItem {
             case "Fries" -> sideItemTypePrice = 4.5;
             case "Chicken Nuggets" -> sideItemTypePrice = 4.95;
             case "Salad" -> sideItemTypePrice = 3.75;
-            case "" -> { this.type = "No side item"; sideItemTypePrice = 0; }
+//            case "" -> { this.type = "No side item"; sideItemTypePrice = 0; }
         }
 
         if (type != "No side item") {
@@ -250,10 +286,21 @@ class SideItem {
     }
 
     @Override
-    public String toString() {
+    public String toString() {                              //We use this getter in 'printOrder' method on class 'Order'
         return "SideItem{" +
                 "type='" + type + '\'' +
                 ", size=" + size +
                 '}';
+    }
+
+    public void sideItemMenu() {                           //With this method we can review the side item's menu
+        System.out.println("===Side Items===\n" +
+                "Fries | $4.5\n" +
+                "Chicken Nuggets | $4.95\n" +
+                "Salad | $3.75\n" +
+                "==Side Item's size==\n" +
+                "'S' (Small) | price - 15%\n" +
+                "'M' (Medium) | price don't change\n" +
+                "'L' (Large) | price + 50%\n");
     }
 }
