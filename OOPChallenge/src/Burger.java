@@ -63,53 +63,40 @@ public class Burger {
         double toppingPrice = 0.0;
         counter = 0;
 
-         if(deluxe) {                                                    //If 'deluxeBurger' is 'true' then the customer can add up to 5 toppings and this isn't change the price
-             if (counter < 5) {
-                 switch (flag) {
-                     case 1 -> {
-                         System.out.println("Extra cheese added");
-                         counter++;
-                         toppings += "Extra cheese added, ";
-                     }
-                     case 2 -> {
-                         System.out.println("Extra ketchup added");
-                         counter++;
-                         toppings += "Extra ketchup added, ";
-                     }
-                     case 3 -> {
-                         System.out.println("Extra mustard added");
-                         counter++;
-                         toppings += "Extra mustard added";
-                     }
+         if(deluxe && counter < 5) {                                                    //If 'deluxeBurger' is 'true' then the customer can add up to 5 toppings and this isn't change the price
+             switch (flag) {
+                 case 1 -> {
+                     System.out.println("Extra cheese added");
+                     toppings += "Extra cheese added, ";
                  }
-             } else {
-                 System.out.println("You've reached your topping limit (5 toppings)!");
-             }
-         } else if (!deluxe) {
-             if (counter < 3) {
-                 switch (flag) {
-                     case 1 -> {
-                         System.out.println("Extra cheese added");
-                         counter++;
-                         toppingPrice += 0.75;
-                         toppings += "Extra cheese added, ";
-                     }
-                     case 2 -> {
-                         System.out.println("Extra ketchup added");
-                         counter++;
-                         toppingPrice += 0.65;
-                         toppings += "Extra ketchup added, ";
-                     }
-                     case 3 -> {
-                         System.out.println("Extra mustard added");
-                         counter++;
-                         toppingPrice += 0.7;
-                         toppings += "Extra mustard added";
-                     }
+                 case 2 -> {
+                     System.out.println("Extra ketchup added");
+                     toppings += "Extra ketchup added, ";
                  }
-             } else {
-                 System.out.println("You've reached your topping limit (3 toppings)!");
+                 case 3 -> {
+                     System.out.println("Extra mustard added");
+                     toppings += "Extra mustard added";
+                 }
              }
+             counter++;
+         } else if (!deluxe && counter < 3) {                                            //The customer can add up to 3 extra toppings if his order hasn't 'Deluxe' status
+             switch (flag) {
+                 case 1 -> {
+                     System.out.println("Extra cheese added");
+                     toppingPrice += 0.75;
+                     toppings += "Extra cheese added, ";
+                 }
+                 case 2 -> {
+                     System.out.println("Extra ketchup added");
+                     toppingPrice += 0.65;
+                     toppings += "Extra ketchup added, ";
+                 }
+                 case 3 -> {
+                     System.out.println("Extra mustard added");
+                     toppings += "Extra mustard added";
+                 }
+             }
+             counter++;
          }
 
          this.toppingsPrice += toppingPrice;                       //Here we add the cost of the toppings chosen by to the customer to the Total Price
