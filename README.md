@@ -1,7 +1,7 @@
 # UdemyChallenges
 Just a common repository for my projects
 
-OOPChallenge: Make a simple Food Ordering App
+==> OOPChallenge: Make a simple Food Ordering App
 
 =====Current features=====
 * You can view the Menu (Burgers, Drinks, Side Items);
@@ -13,7 +13,7 @@ OOPChallenge: Make a simple Food Ordering App
 * If user's input is bad (not match with the Menu) then the Code is set the static value (like "No burger" or "No Drink") to the variables automatically
 * Some new features will come soon...
 
-LinkedListChallenge: Create a list of places to visit with using the LinkedList class
+==> LinkedListChallenge: Create a list of places to visit with using the LinkedList class
 
 =====Current features=====
 * Duplication of places on the list is not allowed;
