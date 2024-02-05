@@ -12,3 +12,13 @@ OOPChallenge: Make a simple Food Ordering App
 * If you won't enter any parameters then the Code make the common Order for you automatically;
 * If user's input is bad (not match with the Menu) then the Code is set the static value (like "No burger" or "No Drink") to the variables automatically
 * Some new features will come soon...
+
+LinkedListChallenge: Create a list of places to visit with using the LinkedList class
+
+=====Current features=====
+* Duplication of places on the list is not allowed;
+* You can add a new place from the terminal by selecting the appropriate action;
+* You can move forwards of backwards through the list of places by selecting the appropriate actions from the terminal;
+* You can show the list of allowed actions by selecting the appropriate action from the terminal;
+* All places are sorted by the distance from the capital city;
+* The capital city is always with index '0';
