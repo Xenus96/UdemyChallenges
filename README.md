@@ -2,6 +2,7 @@
 Just a common repository for my projects
 
 OOPChallenge: Make a simple Food Ordering App
+
 =====Current features=====
 * You can view the Menu (Burgers, Drinks, Side Items);
 * You can choose the type of meal and its size (Small, Medium, Large);
@@ -13,6 +14,7 @@ OOPChallenge: Make a simple Food Ordering App
 * Some new features will come soon...
 
 LinkedListChallenge: Create a list of places to visit with using the LinkedList class
+
 =====Current features=====
 * Duplication of places on the list is not allowed;
 * You can add a new place from the terminal by selecting the appropriate action;
