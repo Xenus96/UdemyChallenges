@@ -119,7 +119,7 @@ public class LinkedListChallenge {
         return placesToVisit;
     }
 
-    public static LinkedList<Places> removePlace(LinkedList<Places> placesToVisit) {
+    public static LinkedList<Places> removePlace(LinkedList<Places> placesToVisit) {                //User can remove a place from the list if he want to
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("What place do you want to remove (enter its name): ");
