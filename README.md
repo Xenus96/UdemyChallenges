@@ -17,8 +17,10 @@ Just a common repository for my projects
 
 =====Current features=====
 * Duplication of places on the list is not allowed;
-* You can add a new place from the terminal by selecting the appropriate action;
-* You can move forwards of backwards through the list of places by selecting the appropriate actions from the terminal;
+* You can add a new place from the terminal by selecting the appropriate action (but only if it doesn't exist in the list);
+* You can remove any place from the list (exept the first place in the list with index '0');
+* You can move forwards of backwards through the list of places by selecting the appropriate actions from the terminal (create a forward or reverse driveway);
 * You can show the list of allowed actions by selecting the appropriate action from the terminal;
 * All places are sorted by the distance from the capital city;
 * The capital city is always with index '0';
+  
